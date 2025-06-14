@@ -5,18 +5,27 @@
   <title>Coffre à code</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #1e1e2f;
-      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      background: #1b1b2f;
+      color: #fff;
       text-align: center;
-      padding-top: 100px;
+      padding: 50px;
     }
+
     .container {
-      background: #2e2e3e;
+      background: #292942;
       padding: 40px;
       border-radius: 20px;
-      display: inline-block;
+      max-width: 400px;
+      margin: auto;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
     }
+
+    img {
+      width: 200px;
+      transition: transform 0.5s ease;
+    }
+
     input[type="password"] {
       font-size: 2em;
       text-align: center;
@@ -25,38 +34,52 @@
       padding: 10px;
       border: none;
       border-radius: 10px;
+      margin-top: 20px;
     }
+
     button {
       margin-top: 20px;
-      padding: 10px 30px;
+      padding: 12px 30px;
       font-size: 1.2em;
       background: #4caf50;
       border: none;
       color: white;
       border-radius: 10px;
       cursor: pointer;
+      transition: background 0.3s ease;
     }
+
+    button:hover {
+      background: #43a047;
+    }
+
     .message {
-      margin-top: 30px;
-      font-size: 1.5em;
+      margin-top: 20px;
+      font-size: 1.4em;
     }
+
     .open {
-      color: #00ff00;
+      color: #00ff88;
     }
+
     .error {
-      color: #ff4444;
+      color: #ff6666;
     }
   </style>
 </head>
 <body>
 
   <div class="container">
-    <h1>Entrez le code du coffre</h1>
-    <input type="password" id="codeInput" maxlength="4" autofocus />
+    <h1>Déverrouille le coffre</h1>
+    <img src="coffre-ferme.png" id="coffreImage" alt="Coffre fermé">
+    <br>
+    <input type="password" id="codeInput" maxlength="4" placeholder="----" autofocus>
     <br>
     <button onclick="checkCode()">Déverrouiller</button>
     <div class="message" id="message"></div>
   </div>
+
+  <audio id="openSound" src="open-sound.mp3"></audio>
 
   <script>
     const correctCode = "9797";
@@ -64,10 +87,14 @@
     function checkCode() {
       const input = document.getElementById("codeInput").value;
       const message = document.getElementById("message");
+      const coffreImage = document.getElementById("coffreImage");
+      const openSound = document.getElementById("openSound");
 
       if (input === correctCode) {
         message.innerHTML = "✅ Coffre ouvert !";
         message.className = "message open";
+        coffreImage.src = "coffre-ouvert.png";
+        openSound.play();
       } else {
         message.innerHTML = "❌ Code incorrect.";
         message.className = "message error";
