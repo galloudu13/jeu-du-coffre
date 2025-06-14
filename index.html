@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Coffre à code</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #1e1e2f;
+      color: white;
+      text-align: center;
+      padding-top: 100px;
+    }
+    .container {
+      background: #2e2e3e;
+      padding: 40px;
+      border-radius: 20px;
+      display: inline-block;
+    }
+    input[type="password"] {
+      font-size: 2em;
+      text-align: center;
+      letter-spacing: 10px;
+      width: 180px;
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+    }
+    button {
+      margin-top: 20px;
+      padding: 10px 30px;
+      font-size: 1.2em;
+      background: #4caf50;
+      border: none;
+      color: white;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+    .message {
+      margin-top: 30px;
+      font-size: 1.5em;
+    }
+    .open {
+      color: #00ff00;
+    }
+    .error {
+      color: #ff4444;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Entrez le code du coffre</h1>
+    <input type="password" id="codeInput" maxlength="4" autofocus />
+    <br>
+    <button onclick="checkCode()">Déverrouiller</button>
+    <div class="message" id="message"></div>
+  </div>
+
+  <script>
+    const correctCode = "9797";
+
+    function checkCode() {
+      const input = document.getElementById("codeInput").value;
+      const message = document.getElementById("message");
+
+      if (input === correctCode) {
+        message.innerHTML = "✅ Coffre ouvert !";
+        message.className = "message open";
+      } else {
+        message.innerHTML = "❌ Code incorrect.";
+        message.className = "message error";
+      }
+    }
+  </script>
+
+</body>
+</html>
